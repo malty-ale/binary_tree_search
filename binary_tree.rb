@@ -77,8 +77,16 @@ class Tree
     end
     return nil
   end
+  
+  def dfs_rec(value, node=@root)
+    return value if node.value == value
+    a = dfs_rec(value, node.left_child) if !node.left_child.nil?
+    return value if a == value
+    b = dfs_rec(value, node.right_child) if !node.right_child.nil?
+    return value if b == value
+  end
 end
 
 a = Tree.new(10)
 a.build_tree([5,3,7,4])
-puts a.depth_first_search(7)
+puts a.dfs_rec(8)
